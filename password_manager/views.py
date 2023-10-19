@@ -71,5 +71,4 @@ class PasswordListView(generics.ListAPIView):
                             decrypt(bytes(bytes_password)).decode('utf-8'))
                 data.password = password
                 password_list.append(data)
-
             return password_list

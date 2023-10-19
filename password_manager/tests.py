@@ -44,7 +44,7 @@ class DataTestCase(APITestCase):
                          {'password': '12345', 'service_name': 'vk'})
 
     def test_get_search(self):
-        # Получение пароля
+        # Получение пароля через поиск
         self.client.post(reverse('password_manager:password',
                                  kwargs={'service_name': 'vk'}),
                          data={'password': '12345'})
@@ -55,3 +55,11 @@ class DataTestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.json(),
                          [{'password': '12345', 'service_name': 'vk'}])
+
+    def test_service_not_exist(self):
+        # Получение пароля с несуществующим сервисом
+        response = self.client.get(reverse('password_manager:password',
+                                           kwargs={'service_name': 'vk'}))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.json(),
+                         'Нет такого сервиса')
