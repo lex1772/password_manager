@@ -54,6 +54,9 @@ class PasswordRetrieveAPI(APIView):
 
 
 class PasswordListView(generics.ListAPIView):
+    """
+        Представление для получения списка подходящих паролей через поиск
+        """
     serializer_class = DataSerializer
 
     def get_queryset(self):
